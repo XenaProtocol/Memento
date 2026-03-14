@@ -23,7 +23,7 @@ namespace Memento.Windows.Tabs
                 ImGui.Spacing();
                 ImGui.Spacing();
                 trackedEmotes();
-                
+
                 footer();
 
                 ImGui.EndTabItem();
@@ -40,45 +40,39 @@ namespace Memento.Windows.Tabs
                 plugin.Config.Save();
             }
 
-            // Calculate total interactions
             int totalInteractions = plugin.Config.EmoteCounts.Values.Sum();
             string totalText = $"Total Admirations: {totalInteractions}";
 
-            // Align to the right
             float posX = ImGui.GetCursorPosX() + ImGui.GetContentRegionAvail().X - ImGui.CalcTextSize(totalText).X;
             ImGui.SameLine(posX);
 
-            ImGui.TextColored(new Vector4(0.9f, 0.3f, 0.5f, 1.0f), totalText);
+            // Replaced hardcoded pink/red with theme color
+            ImGui.TextColored(plugin.GetThemeColor(), totalText);
         }
 
         private void trackedEmotes()
         {
-            // --- TRACKED EMOTES SECTION ---
-            ImGui.TextColored(new Vector4(1.0f, 0.6f, 0.75f, 1.0f), "🎯 Tracked Emote Totals 🎯");
+            ImGui.TextColored(plugin.GetThemeColor(), "🎯 Tracked Emote Totals 🎯");
             ImGui.Separator();
 
             if (ImGui.BeginChild("TrackedTotals", new Vector2(0, -35), true))
             {
-                // The magic RowBg flag strikes again!
                 if (ImGui.BeginTable("StatsTable", 2, ImGuiTableFlags.RowBg))
                 {
-                    // Column 1 stretches for the name, Column 2 stays fixed for the number
                     ImGui.TableSetupColumn("EmoteName", ImGuiTableColumnFlags.WidthStretch);
                     ImGui.TableSetupColumn("Count", ImGuiTableColumnFlags.WidthFixed, 40f);
 
                     foreach (var tracked in plugin.Config.TrackedEmotes)
                     {
                         int count = plugin.Config.EmoteCounts.GetValueOrDefault(tracked);
-
                         ImGui.TableNextRow();
 
-                        // Column 1: The Emote Name
                         ImGui.TableNextColumn();
                         ImGui.Text($"{tracked}:");
 
-                        // Column 2: The Total Count
                         ImGui.TableNextColumn();
-                        ImGui.TextColored(new Vector4(0.9f, 0.4f, 0.6f, 1.0f), count.ToString());
+                        // Replaced hardcoded count color
+                        ImGui.TextColored(plugin.GetThemeColor(), count.ToString());
                     }
                     ImGui.EndTable();
                 }
@@ -88,8 +82,7 @@ namespace Memento.Windows.Tabs
 
         private void popularEmotes()
         {
-            // --- POPULAR EMOTES SECTION ---
-            ImGui.TextColored(new Vector4(1.0f, 0.6f, 0.75f, 1.0f), "📊 Popular Emotes 📊");
+            ImGui.TextColored(plugin.GetThemeColor(), "📊 Popular Emotes 📊");
             ImGui.Separator();
 
             var sortedEmotes = plugin.Config.EmoteCounts.OrderByDescending(x => x.Value).ToList();
@@ -98,7 +91,8 @@ namespace Memento.Windows.Tabs
             {
                 ImGui.Text($"Most received emote:");
                 ImGui.SameLine();
-                ImGui.TextColored(new Vector4(0.9f, 0.4f, 0.6f, 1.0f), $"{sortedEmotes[0].Key} ({sortedEmotes[0].Value} times)");
+                // Replaced hardcoded color for the top emote
+                ImGui.TextColored(plugin.GetThemeColor(), $"{sortedEmotes[0].Key} ({sortedEmotes[0].Value} times)");
 
                 if (sortedEmotes.Count > 1) ImGui.Text($"Second highest: {sortedEmotes[1].Key} ({sortedEmotes[1].Value})");
                 if (sortedEmotes.Count > 2) ImGui.Text($"Third highest: {sortedEmotes[2].Key} ({sortedEmotes[2].Value})");
@@ -111,8 +105,7 @@ namespace Memento.Windows.Tabs
 
         private void paparazzi()
         {
-            // --- PAPARAZZI SECTION ---
-            ImGui.TextColored(new Vector4(1.0f, 0.6f, 0.75f, 1.0f), "✨ Paparazzi ✨");
+            ImGui.TextColored(plugin.GetThemeColor(), "✨ Paparazzi ✨");
             ImGui.Separator();
 
             var topAdmirer = plugin.Config.AdmirerCounts.OrderByDescending(x => x.Value).FirstOrDefault();
@@ -120,11 +113,13 @@ namespace Memento.Windows.Tabs
 
             ImGui.Text("Most Emotes Received From:");
             ImGui.SameLine();
-            ImGui.TextColored(new Vector4(0.9f, 0.4f, 0.6f, 1.0f), topAdmirer.Key ?? "None yet!");
+            // Replaced hardcoded name color
+            ImGui.TextColored(plugin.GetThemeColor(), topAdmirer.Key ?? "None yet!");
 
             ImGui.Text("Most Checks From:");
             ImGui.SameLine();
-            ImGui.TextColored(new Vector4(0.9f, 0.4f, 0.6f, 1.0f), topChecker.Key ?? "None yet!");
+            // Replaced hardcoded name color
+            ImGui.TextColored(plugin.GetThemeColor(), topChecker.Key ?? "None yet!");
         }
     }
 }

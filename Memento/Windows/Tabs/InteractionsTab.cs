@@ -13,7 +13,9 @@ namespace Memento.Windows.Tabs
         {
             if (ImGui.BeginTabItem("Interactions"))
             {
-                ImGui.TextColored(new Vector4(0.9f, 0.4f, 0.6f, 1.0f), "Recent Sweet Moments:");
+                // Grab the dynamic theme color
+                ImGui.TextColored(plugin.GetThemeColor(), "Recent Sweet Moments:");
+
                 ImGui.Separator();
                 if (ImGui.BeginChild("EmoteLog", new Vector2(0, -35), true))
                 {

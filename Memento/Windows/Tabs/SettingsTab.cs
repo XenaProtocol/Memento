@@ -17,19 +17,21 @@ namespace Memento.Windows.Tabs
         {
             if (ImGui.BeginTabItem("Settings"))
             {
-                // Chat Settings
-                ImGui.TextColored(new Vector4(0.9f, 0.4f, 0.6f, 1.0f), "Chat Notifications:");
+                var themeColor = plugin.GetThemeColor(); // Grab the helper!
 
+                // Chat Settings
+                ImGui.TextColored(themeColor, "Chat Notifications:");
                 chatNoti();
 
                 ImGui.Separator();
                 ImGui.Spacing();
 
                 // Emote Tracker Settings
+                ImGui.TextColored(themeColor, "Add a new emote:");
                 emoteTracker();
 
                 ImGui.Spacing();
-                ImGui.TextColored(new Vector4(0.9f, 0.4f, 0.6f, 1.0f), "Currently Admiring:");
+                ImGui.TextColored(themeColor, "Currently Admiring:");
 
                 // Tracked Emotes List
                 trackedEmotes();
@@ -61,7 +63,7 @@ namespace Memento.Windows.Tabs
 
                         // Column 2: The Delete Button
                         ImGui.TableNextColumn();
-                        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.9f, 0.4f, 0.5f, 1.0f));
+                        ImGui.PushStyleColor(ImGuiCol.Button, plugin.GetThemeColor());
                         if (ImGui.Button($"X##{emoteName}")) toRemove = emoteName;
                         ImGui.PopStyleColor();
                     }
@@ -98,8 +100,6 @@ namespace Memento.Windows.Tabs
         private void emoteTracker()
         {
             // --- Emote Tracker Settings ---
-            ImGui.TextColored(new Vector4(0.9f, 0.4f, 0.6f, 1.0f), "Add a new emote:");
-
             // 1. Figure out what the dropdown should say BEFORE we draw it
             string comboPreview = "Select an emote...";
             if (selectedEmoteId != 0)
@@ -118,8 +118,8 @@ namespace Memento.Windows.Tabs
                 ImGui.Text("Search:");
                 ImGui.SameLine();
 
-                // Temporarily make the search bar background a bit darker!
-                ImGui.PushStyleColor(ImGuiCol.FrameBg, new Vector4(0.9f, 0.8f, 0.85f, 1.0f));
+                // Temporarily make the search bar background match the theme, but slightly darker!
+                ImGui.PushStyleColor(ImGuiCol.FrameBg, plugin.GetSearchBgColor());
 
                 // Use InputTextWithHint for that cool ghost-text placeholder
                 ImGui.InputTextWithHint("##InsideSearch", "type here to search...", ref emoteSearch, 64);

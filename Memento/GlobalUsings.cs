@@ -9,6 +9,8 @@ global using Dalamud.IoC;
 global using Dalamud.Plugin;
 global using Dalamud.Plugin.Services;
 global using Dalamud.Bindings.ImGui;
+global using Dalamud.Interface;
+global using Dalamud.Interface.Components;
 
 // --- Memento Project Files ---
 global using Memento.Windows;

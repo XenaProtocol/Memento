@@ -1,48 +1,63 @@
+
+using Dalamud.Interface.Windowing;
+
+
 namespace Memento.Windows
 {
-    public class MainWindow
+    public class MainWindow : Window, IDisposable
     {
         private Plugin plugin;
-        public bool IsVisible = false;
-
-        // Our individual tab classes4
         private InteractionsTab interactionsTab;
         private AdmirersTab admirersTab;
         private SettingsTab settingsTab;
         private StatsTab statsTab;
 
-        public MainWindow(Plugin plugin)
+        public MainWindow(Plugin plugin) : base("Memento###MementoMain")
         {
             this.plugin = plugin;
+            this.IsOpen = false;
 
-            // Initialize the tabs when the window is created
+            // This is the specific list managed by the Windowing system.
+            // Based on your previous errors, we'll use the fully qualified name.
+            TitleBarButtons = new List<Window.TitleBarButton>
+            {
+                new()
+                {
+                    Icon = FontAwesomeIcon.Cog,
+                    // We'll use OnTrigger which is the most common version-safe name.
+                    // If 'OnTrigger' still errors, change only this word to 'ClickAction' or 'Action'
+                    Click = (btn) => { plugin.configWindow.IsOpen = !plugin.configWindow.IsOpen; },
+                    ShowTooltip = () => ImGui.SetTooltip("Memento Visual Settings")
+                }
+            };
+
+            SizeConstraints = new WindowSizeConstraints
+            {
+                MinimumSize = new Vector2(400, 400),
+                MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
+            };
+
             interactionsTab = new InteractionsTab(plugin);
             admirersTab = new AdmirersTab(plugin);
             statsTab = new StatsTab(plugin);
             settingsTab = new SettingsTab(plugin);
         }
 
-        public void DrawUI()
-        {
-            if (!IsVisible) return;
-            ImGui.SetNextWindowSize(new Vector2(500, 400), ImGuiCond.FirstUseEver);
-            ImGui.SetNextWindowSizeConstraints(new Vector2(400, 400), new Vector2(float.MaxValue, float.MaxValue));
+        public void Dispose() { }
 
-            using (var theme = new WindowCustomization())
+        // REMOVED: DrawConfig (as it was causing the override error)
+
+        public override void Draw()
+        {
+            ImGui.SetWindowFontScale(plugin.Config.FontScale);
+
+            if (ImGui.BeginTabBar("SocialTabs"))
             {
-                if (ImGui.Begin("Memento", ref IsVisible))
-                {
-                    if (ImGui.BeginTabBar("SocialTabs"))
-                    {
-                        // Simply tell each tab to draw itself!
-                        interactionsTab.Draw();
-                        admirersTab.Draw();
-                        statsTab.Draw();
-                        settingsTab.Draw();
-                        ImGui.EndTabBar();
-                    }
-                }
-                ImGui.End();
+                interactionsTab.Draw();
+                admirersTab.Draw();
+                statsTab.Draw();
+                settingsTab.Draw();
+                ImGui.EndTabBar();
             }
         }
     }

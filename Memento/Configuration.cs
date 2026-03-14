@@ -22,6 +22,10 @@ public class Configuration : IPluginConfiguration
     // Also add a counter for "Checking out" (Targeting)
     public Dictionary<string, int> TargetCounts { get; set; } = new();
 
+    // UI Settings
+    public string Theme { get; set; } = "Pretty in Pink";
+    public float FontScale { get; set; } = 1.0f;
+
     [NonSerialized]
     private IDalamudPluginInterface? pluginInterface;
 
