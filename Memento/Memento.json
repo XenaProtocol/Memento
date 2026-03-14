@@ -1,12 +1,17 @@
 {
   "Author": "XenaProtocol",
   "Name": "Memento",
+  "InternalName": "Memento",
   "Punchline": "A cozy counter that bottles up every emote you receive so you can track exactly how loved you are.",
-  "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
+  "Description": "Memento is a social tracking utility designed to help you remember the sweet moments. It automatically logs received emotes (like headpats, dotes, and hugs) and tracks players who check you out. Features include detailed interaction logs, admirer statistics, and customizable pastel themes to match your aesthetic.\n\nMain Command: /memento",
   "ApplicableVersion": "any",
+  "RepoUrl": "https://github.com/XenaProtocol/Memento",
   "Tags": [
-    "sample",
-    "plugin",
-    "goats"
-  ]
+    "social",
+    "tracking",
+    "utility",
+    "cosmetic",
+    "log"
+  ],
+  "IconUrl": "https://raw.githubusercontent.com/XenaProtocol/Memento/main/icon.png"
 }
