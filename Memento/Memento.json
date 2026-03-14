@@ -1,0 +1,12 @@
+{
+  "Author": "XenaProtocol",
+  "Name": "Memento",
+  "Punchline": "A cozy counter that bottles up every emote you receive so you can track exactly how loved you are.",
+  "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "sample",
+    "plugin",
+    "goats"
+  ]
+}
