@@ -1,0 +1,24 @@
+{
+  "Author": "XenaProtocol",
+  "Name": "Memento",
+  "InternalName": "Memento",
+  "ID": "a2fd6d91-7a67-41f3-8742-d09499a1f112",
+  "AssemblyVersion": "1.2.0.0",
+  "Description": "Memento is a virtual pet companion and social tracker. Hatch and raise a pet that grows from the emotes you receive — every /dote, /hug, and /pet shapes its stats and mood. Track who's checking you out with the observer system, see your best friends leaderboard, and keep your pet happy with daily care activities like duties, crafting, and GPose. Per-character data means every alt gets their own pet.\n\nMain Command: /memento\nPopout: /mementopet",
+  "ApplicableVersion": "any",
+  "RepoUrl": "https://github.com/XenaProtocol/Memento",
+  "Tags": [
+    "social",
+    "tracking",
+    "utility",
+    "cosmetic"
+  ],
+  "DalamudApiLevel": 14,
+  "LoadRequiredState": 0,
+  "LoadSync": false,
+  "CanUnloadAsync": false,
+  "LoadPriority": 0,
+  "Punchline": "Raise a virtual pet fuelled by the emotes you receive, and see who's been checking you out.",
+  "AcceptsFeedback": true,
+  "IconUrl": "https://raw.githubusercontent.com/XenaProtocol/Memento/main/icon.png"
+}
